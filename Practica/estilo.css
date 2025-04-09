@@ -1,0 +1,223 @@
+:root {
+    --accent: #D4AF37; /* Dorado sutil para un toque de lujo */
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
+    --text-primary: #333333; /* Gris oscuro para textos principales */
+    --text-secondary: #666666; /* Gris medio para textos secundarios */
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #FFFFFF, #F5F5F5);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  
+  header {
+    text-align: center;
+    padding: 2.5rem 0;
+    background: #FFFFFF;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  
+  header .intro {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+  }
+  
+  nav {
+    text-align: center;
+    padding: 1rem 0;
+    background: #FFFFFF;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  nav label {
+    margin: 0 2rem;
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+  }
+  
+  nav label:hover {
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+  
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  
+  /* Ocultar los inputs de tipo radio */
+  .carousel-container input[type="radio"] {
+    display: none;
+  }
+  
+  .slides {
+    position: relative;
+    width: 100%;
+    height: 500px; /* Ajusta según el tamaño de las imágenes */
+  }
+  
+  .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+    background: linear-gradient(135deg, #F5F5F5, #E8ECEF);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  
+  /* Mostrar el slide correspondiente cuando el input está checked */
+  #slide1:checked ~ .slides .slide:nth-child(1),
+  #slide2:checked ~ .slides .slide:nth-child(2),
+  #slide3:checked ~ .slides .slide:nth-child(3) {
+    opacity: 1;
+  }
+  
+  .slide:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+  }
+  
+  .slide img {
+    width: 70%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .watch-name {
+    margin-top: 1.5rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  
+  .price {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-align: center;
+  }
+  
+  .price::before {
+    content: "💎 ";
+    color: var(--accent);
+  }
+  
+  .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0.6rem;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 1.3rem;
+    color: var(--text-secondary);
+    box-shadow: var(--shadow);
+    z-index: 10;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .arrow:hover {
+    background: var(--accent);
+    color: #FFFFFF;
+    transform: translateY(-50%) scale(1.1);
+  }
+  
+  .arrow.left {
+    left: 30px;
+  }
+  
+  .arrow.right {
+    right: 30px;
+  }
+  
+  .dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 1.5rem;
+  }
+  
+  .dot {
+    width: 10px;
+    height: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .dot:hover {
+    background: var(--accent);
+    transform: scale(1.2);
+  }
+  
+  /* Resaltar el punto activo */
+  #slide1:checked ~ .dots .dot:nth-child(1),
+  #slide2:checked ~ .dots .dot:nth-child(2),
+  #slide3:checked ~ .dots .dot:nth-child(3) {
+    background: var(--accent);
+    transform: scale(1.2);
+  }
+  
+  footer {
+    text-align: center;
+    padding: 2rem 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    background: #FFFFFF;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+  }
