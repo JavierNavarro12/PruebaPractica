@@ -15,53 +15,98 @@
   </header>
 
   <nav>
-    <label for="slide1">Richard Mille</label>
-    <label for="slide2">Rolex</label>
-    <label for="slide3">Hermes</label> 
+    <a href="#inicio" class="active">Inicio</a>
+    <a href="#catalogo">Catálogo</a>
+    <a href="#contacto">Contacto</a>
   </nav>
 
   <main>
-    <div class="carousel-container">
-      <input type="radio" name="carousel" id="slide1" checked>
-      <input type="radio" name="carousel" id="slide2">
-      <input type="radio" name="carousel" id="slide3">
+    <section id="inicio">
+      <div class="carousel-container">
+        <input type="radio" name="carousel" id="slide1" checked>
+        <input type="radio" name="carousel" id="slide2">
+        <input type="radio" name="carousel" id="slide3">
 
-      <div class="slides">
-        <div class="slide">
-          <label for="slide3" class="arrow left" aria-label="Ir a la imagen anterior">←</label>
-          <img src="img/reloj1.png" alt="Richard Mille 57-03" />
-          <h3 class="watch-name">Richard Mille 57-03</h3>
-          <p class="price">Precio: 3.946.102,00 €</p>
-          <label for="slide2" class="arrow right" aria-label="Ir a la imagen siguiente">→</label>
+        <div class="slides">
+          <div class="slide">
+            <label for="slide3" class="arrow left" aria-label="Ir a la imagen anterior">←</label>
+            <img src="img/reloj1.png" alt="Richard Mille 57-03" />
+            <h3 class="watch-name">Richard Mille 57-03</h3>
+            <p class="price">Precio: 3.946.102,00 €</p>
+            <label for="slide2" class="arrow right" aria-label="Ir a la imagen siguiente">→</label>
+          </div>
+
+          <div class="slide">
+            <label for="slide1" class="arrow left" aria-label="Ir a la imagen anterior">←</label>
+            <img src="img/reloj2.png" alt="Rolex Datejust" />
+            <h3 class="watch-name">Rolex Datejust</h3>
+            <p class="price">Precio: 12.500 €</p>
+            <label for="slide3" class="arrow right" aria-label="Ir a la imagen siguiente">→</label>
+          </div>
+
+          <div class="slide">
+            <label for="slide2" class="arrow left" aria-label="Ir a la imagen anterior">←</label>
+            <img src="img/reloj3.png" alt="Hermes Arceau L'heure de la lune" />
+            <h3 class="watch-name">Reloj Arceau L'heure de la lune</h3>
+            <p class="price">Precio: 37.100 €</p>
+            <label for="slide1" class="arrow right" aria-label="Ir a la imagen siguiente">→</label>
+          </div>
         </div>
 
-        <div class="slide">
-          <label for="slide1" class="arrow left" aria-label="Ir a la imagen anterior">←</label>
-          <img src="img/reloj2.png" alt="Rolex Datejust" />
-          <h3 class="watch-name">Rolex Datejust</h3>
-          <p class="price">Precio: 12.500 €</p>
-          <label for="slide3" class="arrow right" aria-label="Ir a la imagen siguiente">→</label>
-        </div>
-
-        <div class="slide">
-          <label for="slide2" class="arrow left" aria-label="Ir a la imagen anterior">←</label>
-          <img src="img/reloj3.png" alt="Hermes Arceau L'heure de la lune" />
-          <h3 class="watch-name">Reloj Arceau L'heure de la lune</h3>
-          <p class="price">Precio: 37.100 €</p>
-          <label for="slide1" class="arrow right" aria-label="Ir a la imagen siguiente">→</label>
+        <div class="dots">
+          <label for="slide1" class="dot" aria-label="Ir a la imagen 1"></label>
+          <label for="slide2" class="dot" aria-label="Ir a la imagen 2"></label>
+          <label for="slide3" class="dot" aria-label="Ir a la imagen 3"></label>
         </div>
       </div>
+    </section>
 
-      <div class="dots">
-        <label for="slide1" class="dot" aria-label="Ir a la imagen 1"></label>
-        <label for="slide2" class="dot" aria-label="Ir a la imagen 2"></label>
-        <label for="slide3" class="dot" aria-label="Ir a la imagen 3"></label>
+    <section id="destacados">
+      <h2>Relojes destacados</h2>
+      <p class="intro">Explora nuestra colección exclusiva de relojes que combinan elegancia y precisión.</p>
+    </section>
+
+    <section id="catalogo">
+      <h2>Catálogo</h2>
+      <div class="items-container">
+        <div class="item">
+          <img src="img/reloj1.png" alt="Reloj de lujo 1" />
+          <h3>Reloj de lujo 1</h3>
+          <p>Precio: 50.000 €</p>
+        </div>
+        <div class="item">
+          <img src="img/reloj2.png" alt="Reloj de lujo 2" />
+          <h3>Reloj de lujo 2</h3>
+          <p>Precio: 25.000 €</p>
+        </div>
+        <div class="item">
+          <img src="img/reloj3.png" alt="Reloj de lujo 3" />
+          <h3>Reloj de lujo 3</h3>
+          <p>Precio: 75.000 €</p>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <section id="contacto">
+      <h2>Contacto</h2>
+      <form class="contact-form" aria-label="Formulario de contacto">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required aria-required="true" />
+
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" placeholder="tu@email.com" required aria-required="true" />
+
+        <label for="mensaje">Mensaje:</label>
+        <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje aquí" required aria-required="true"></textarea>
+
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
   </main>
 
   <footer id="footer">
     <p>© Página web Javier Navarro. Todos los derechos reservados.</p>
+    <p class="footer-icon">⌚ Relojería Javi</p>
   </footer>
 </body>
 </html>
