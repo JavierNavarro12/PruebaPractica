@@ -3,110 +3,189 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Relojería Javi</title>
+  <title>Luxury Watches - Relojes de Lujo</title>
   <link rel="stylesheet" href="estilo.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="icon" type="image/png" href="img/favicon.png" />
 </head>
 <body>
   <header>
-    <h1>Relojería Javi</h1>
-    <p class="intro">Descubre nuestra selección de relojes de lujo de las mejores marcas del mundo.</p>
+    <h1>Luxury Watches</h1>
+    <p class="intro">Descubre nuestra exclusiva colección de relojes de lujo, donde la elegancia se encuentra con la precisión.</p>
   </header>
 
   <nav>
     <a href="#inicio" class="active">Inicio</a>
-    <a href="#catalogo">Catálogo</a>
+    <a href="#colecciones">Colecciones</a>
+    <a href="#novedades">Novedades</a>
+    <a href="#blog">Blog</a>
     <a href="#contacto">Contacto</a>
+    <div class="cart-icon">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="cart-count" id="cartCount">0</span>
+    </div>
   </nav>
+
+  <div class="search-container">
+    <input type="text" id="searchInput" class="search-input" placeholder="Buscar relojes...">
+  </div>
+
+  <div class="categories">
+    <button class="category-btn active" data-category="all">Todos</button>
+    <button class="category-btn" data-category="luxury">Lujo</button>
+    <button class="category-btn" data-category="sport">Deportivos</button>
+    <button class="category-btn" data-category="classic">Clásicos</button>
+  </div>
 
   <main>
     <section id="inicio">
       <div class="carousel-container">
-        <input type="radio" name="carousel" id="slide1" checked>
-        <input type="radio" name="carousel" id="slide2">
-        <input type="radio" name="carousel" id="slide3">
+        <input type="radio" name="slide" id="slide1" checked>
+        <input type="radio" name="slide" id="slide2">
+        <input type="radio" name="slide" id="slide3">
 
         <div class="slides">
           <div class="slide">
-            <label for="slide3" class="arrow left" aria-label="Ir a la imagen anterior">←</label>
-            <img src="img/reloj1.png" alt="Richard Mille 57-03" />
-            <h3 class="watch-name">Richard Mille 57-03</h3>
-            <p class="price">Precio: 3.946.102,00 €</p>
-            <label for="slide2" class="arrow right" aria-label="Ir a la imagen siguiente">→</label>
+            <img src="img/reloj1.png" alt="Richard Mille 57-03">
+            <h2 class="watch-name">Richard Mille 57-03</h2>
+            <p class="price">3.946.102,00 €</p>
           </div>
-
           <div class="slide">
-            <label for="slide1" class="arrow left" aria-label="Ir a la imagen anterior">←</label>
-            <img src="img/reloj2.png" alt="Rolex Datejust" />
-            <h3 class="watch-name">Rolex Datejust</h3>
-            <p class="price">Precio: 12.500 €</p>
-            <label for="slide3" class="arrow right" aria-label="Ir a la imagen siguiente">→</label>
+            <img src="img/reloj2.png" alt="Rolex Datejust">
+            <h2 class="watch-name">Rolex Datejust</h2>
+            <p class="price">12.500,00 €</p>
           </div>
-
           <div class="slide">
-            <label for="slide2" class="arrow left" aria-label="Ir a la imagen anterior">←</label>
-            <img src="img/reloj3.png" alt="Hermes Arceau L'heure de la lune" />
-            <h3 class="watch-name">Reloj Arceau L'heure de la lune</h3>
-            <p class="price">Precio: 37.100 €</p>
-            <label for="slide1" class="arrow right" aria-label="Ir a la imagen siguiente">→</label>
+            <img src="img/reloj3.png" alt="Hermes Arceau">
+            <h2 class="watch-name">Hermes Arceau L'heure de la lune</h2>
+            <p class="price">37.100,00 €</p>
           </div>
         </div>
 
+        <button class="arrow left" aria-label="Anterior">❮</button>
+        <button class="arrow right" aria-label="Siguiente">❯</button>
+
         <div class="dots">
-          <label for="slide1" class="dot" aria-label="Ir a la imagen 1"></label>
-          <label for="slide2" class="dot" aria-label="Ir a la imagen 2"></label>
-          <label for="slide3" class="dot" aria-label="Ir a la imagen 3"></label>
+          <label for="slide1" class="dot"></label>
+          <label for="slide2" class="dot"></label>
+          <label for="slide3" class="dot"></label>
         </div>
       </div>
     </section>
 
-    <section id="destacados">
-      <h2>Relojes destacados</h2>
-      <p class="intro">Explora nuestra colección exclusiva de relojes que combinan elegancia y precisión.</p>
+    <section id="colecciones">
+      <h2>Nuestras Colecciones</h2>
+      <div class="items-container">
+        <div class="item" data-category="luxury">
+          <img src="img/reloj1.png" alt="Richard Mille 57-03">
+          <h3>Richard Mille 57-03</h3>
+          <p>Reloj de alta precisión con acabados premium</p>
+          <p class="price">3.946.102,00 €</p>
+          <button onclick="addToCart(1, 'Richard Mille 57-03', 3946102)">Añadir al carrito</button>
+        </div>
+        <div class="item" data-category="classic">
+          <img src="img/reloj2.png" alt="Rolex Datejust">
+          <h3>Rolex Datejust</h3>
+          <p>Clásico atemporal con acabados artesanales</p>
+          <p class="price">12.500,00 €</p>
+          <button onclick="addToCart(2, 'Rolex Datejust', 12500)">Añadir al carrito</button>
+        </div>
+        <div class="item" data-category="luxury">
+          <img src="img/reloj3.png" alt="Hermes Arceau">
+          <h3>Hermes Arceau L'heure de la lune</h3>
+          <p>Diseño exclusivo con acabados de lujo</p>
+          <p class="price">37.100,00 €</p>
+          <button onclick="addToCart(3, 'Hermes Arceau', 37100)">Añadir al carrito</button>
+        </div>
+      </div>
     </section>
 
-    <section id="catalogo">
-      <h2>Catálogo</h2>
+    <section id="novedades" class="testimonials">
+      <h2>Novedades</h2>
       <div class="items-container">
-        <div class="item">
-          <img src="img/reloj1.png" alt="Reloj de lujo 1" />
-          <h3>Reloj de lujo 1</h3>
-          <p>Precio: 50.000 €</p>
+        <div class="item" data-category="luxury">
+          <span class="new-badge">Nuevo</span>
+          <img src="img/reloj1.png" alt="Richard Mille 57-03">
+          <h3>Richard Mille 57-03</h3>
+          <p>Edición especial conmemorativa</p>
+          <p class="price">3.946.102,00 €</p>
+          <button onclick="addToCart(4, 'Richard Mille 57-03', 3946102)">Añadir al carrito</button>
         </div>
-        <div class="item">
-          <img src="img/reloj2.png" alt="Reloj de lujo 2" />
-          <h3>Reloj de lujo 2</h3>
-          <p>Precio: 25.000 €</p>
+      </div>
+    </section>
+
+    <section id="testimonios" class="testimonials">
+      <h2>Lo que dicen nuestros clientes</h2>
+      <div class="items-container">
+        <div class="testimonial-card">
+          <img src="img/reloj1.png" alt="Cliente 1">
+          <p class="testimonial-text">"La calidad y el servicio son excepcionales. Mi reloj es una obra de arte."</p>
+          <p class="testimonial-author">- Carlos Rodríguez</p>
         </div>
-        <div class="item">
-          <img src="img/reloj3.png" alt="Reloj de lujo 3" />
-          <h3>Reloj de lujo 3</h3>
-          <p>Precio: 75.000 €</p>
+        <div class="testimonial-card">
+          <img src="img/reloj2.png" alt="Cliente 2">
+          <p class="testimonial-text">"La atención al detalle y el acabado son impresionantes. Totalmente recomendado."</p>
+          <p class="testimonial-author">- María González</p>
         </div>
+      </div>
+    </section>
+
+    <section id="blog">
+      <h2>Blog</h2>
+      <div class="blog-grid">
+        <article class="blog-card">
+          <img src="img/reloj1.png" alt="Blog Post 1">
+          <div class="blog-content">
+            <p class="blog-date">15 Marzo 2024</p>
+            <h3 class="blog-title">Guía para elegir tu primer reloj de lujo</h3>
+            <p class="blog-excerpt">Descubre los factores clave a considerar al comprar tu primer reloj de alta gama...</p>
+          </div>
+        </article>
+        <article class="blog-card">
+          <img src="img/reloj2.png" alt="Blog Post 2">
+          <div class="blog-content">
+            <p class="blog-date">10 Marzo 2024</p>
+            <h3 class="blog-title">El arte de la relojería suiza</h3>
+            <p class="blog-excerpt">Exploramos la rica historia y tradición de la relojería suiza...</p>
+          </div>
+        </article>
       </div>
     </section>
 
     <section id="contacto">
       <h2>Contacto</h2>
-      <form class="contact-form" aria-label="Formulario de contacto">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required aria-required="true" />
-
-        <label for="email">Correo electrónico:</label>
-        <input type="email" id="email" name="email" placeholder="tu@email.com" required aria-required="true" />
-
-        <label for="mensaje">Mensaje:</label>
-        <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje aquí" required aria-required="true"></textarea>
-
-        <button type="submit">Enviar</button>
+      <form class="contact-form">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" required>
+        
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" name="mensaje" required></textarea>
+        
+        <button type="submit">Enviar mensaje</button>
       </form>
     </section>
+
+    <div class="cart-modal">
+      <h3>Carrito de Compras</h3>
+      <div id="cartItems"></div>
+      <div class="cart-total">
+        Total: <span id="cartTotal">0,00 €</span>
+      </div>
+      <button onclick="checkout()">Proceder al pago</button>
+    </div>
   </main>
 
-  <footer id="footer">
-    <p>© Página web Javier Navarro. Todos los derechos reservados.</p>
-    <p class="footer-icon">⌚ Relojería Javi</p>
+  <footer>
+    <p>&copy; 2024 Luxury Watches. Todos los derechos reservados.</p>
+    <div class="footer-icon">
+      <i class="fas fa-gem"></i>
+    </div>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
