@@ -56,20 +56,34 @@ function formatPrice(price) {
 }
 
 function addToCart(id, name, price) {
-    cart.push({ id, name, price });
-    cartTotal += price;
+    const found = cart.find(item => item.id === id);
+    if (found) {
+        found.qty += 1;
+    } else {
+        cart.push({ id, name, price, qty: 1 });
+    }
     updateCart();
     showNotification(`${name} añadido al carrito`);
+    animateCartCount();
 }
 
-function updateCart() {
-    const cartItems = document.getElementById('cartItems');
-    const cartCount = document.getElementById('cartCount');
-    const cartTotalElement = document.getElementById('cartTotal');
-    
-    cartItems.innerHTML = '';
-    cartCount.textContent = cart.length;
-    cartTotalElement.textContent = cartTotal.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' });
+function increaseQty(id) {
+    const found = cart.find(item => item.id === id);
+    if (found) {
+        found.qty += 1;
+        updateCart();
+    }
+}
+
+function decreaseQty(id) {
+    const found = cart.find(item => item.id === id);
+    if (found && found.qty > 1) {
+        found.qty -= 1;
+    } else {
+        removeFromCart(id);
+        return;
+    }
+    updateCart();
 }
 
 function removeFromCart(id) {
@@ -78,15 +92,91 @@ function removeFromCart(id) {
     showNotification('Producto eliminado del carrito');
 }
 
-function showNotification(message) {
+function animateCartCount() {
+    const cartCount = document.getElementById('cartCount');
+    cartCount.classList.remove('animated');
+    void cartCount.offsetWidth; // trigger reflow
+    cartCount.classList.add('animated');
+}
+
+// Sincronizar contador del botón flotante
+function updateFabCartCount() {
+    const fabCartCount = document.getElementById('fabCartCount');
+    if (fabCartCount) {
+        fabCartCount.textContent = cart.reduce((acc, item) => acc + item.qty, 0);
+    }
+}
+
+// Mostrar/ocultar modal desde el botón flotante
+const fabCartBtn = document.getElementById('fabCartBtn');
+const cartModal = document.querySelector('.cart-modal');
+
+function toggleFabCart(show) {
+    const fabCart = document.getElementById('fabCartBtn');
+    if (fabCart) {
+        fabCart.style.display = show ? 'flex' : 'none';
+    }
+}
+
+if (fabCartBtn) {
+    fabCartBtn.addEventListener('click', () => {
+        cartModal.classList.toggle('active');
+        toggleFabCart(!cartModal.classList.contains('active'));
+    });
+}
+
+// Vaciar carrito
+const emptyCartBtn = document.getElementById('emptyCartBtn');
+if (emptyCartBtn) {
+    emptyCartBtn.addEventListener('click', () => {
+        cart = [];
+        updateCart();
+        showNotification('Carrito vaciado', 'fa-trash');
+    });
+}
+
+// Mejorar notificación con icono
+function showNotification(message, icon = 'fa-check') {
     const notification = document.createElement('div');
     notification.className = 'notification';
-    notification.textContent = message;
+    notification.innerHTML = `<i class="fas ${icon}"></i> ${message}`;
     document.body.appendChild(notification);
-    
     setTimeout(() => {
         notification.remove();
     }, 3000);
+}
+
+// Modificar updateCart para sincronizar ambos contadores
+function updateCart() {
+    const cartItems = document.getElementById('cartItems');
+    const cartCount = document.getElementById('cartCount');
+    const cartTotalElement = document.getElementById('cartTotal');
+    cartTotal = 0;
+    cartItems.innerHTML = '';
+    cart.forEach(item => {
+        cartTotal += item.price * item.qty;
+        cartItems.innerHTML += `
+        <div class="cart-item">
+            <img src="img/reloj${item.id}.png" alt="${item.name}">
+            <div class="cart-item-details">
+                <div class="cart-item-title">${item.name}</div>
+                <div class="cart-item-price">${formatPrice(item.price)} x ${item.qty}</div>
+                <div class="cart-item-controls">
+                    <button class="cart-item-btn" onclick="decreaseQty(${item.id})">-</button>
+                    <span>${item.qty}</span>
+                    <button class="cart-item-btn" onclick="increaseQty(${item.id})">+</button>
+                    <button class="cart-item-remove" onclick="removeFromCart(${item.id})" title="Eliminar"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+        </div>`;
+    });
+    const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
+    cartCount.textContent = totalQty;
+    cartTotalElement.textContent = cartTotal.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' });
+    updateFabCartCount();
+    if (cart.length === 0) {
+        cartItems.innerHTML = '<div class="empty-cart">Tu carrito está vacío</div>';
+    }
 }
 
 function checkout() {
@@ -151,15 +241,38 @@ contactForm.addEventListener('submit', (e) => {
 
 // Carrito modal
 const cartIcon = document.querySelector('.cart-icon');
-const cartModal = document.querySelector('.cart-modal');
 
-cartIcon.addEventListener('click', () => {
-    cartModal.classList.toggle('active');
+// Botón cerrar carrito
+const cartCloseBtn = document.getElementById('cartCloseBtn');
+if (cartCloseBtn) {
+    cartCloseBtn.addEventListener('click', () => {
+        cartModal.classList.remove('active');
+        toggleFabCart(true);
+    });
+}
+
+// Cerrar carrito solo si el click es fuera del modal y no en controles internos
+document.addEventListener('mousedown', (e) => {
+    if (
+        cartModal.classList.contains('active') &&
+        !cartModal.contains(e.target) &&
+        !cartIcon.contains(e.target) &&
+        !(fabCartBtn && fabCartBtn.contains(e.target))
+    ) {
+        cartModal.classList.remove('active');
+        toggleFabCart(true);
+    }
 });
 
-// Cerrar carrito al hacer click fuera
-document.addEventListener('click', (e) => {
-    if (!cartModal.contains(e.target) && !cartIcon.contains(e.target)) {
-        cartModal.classList.remove('active');
-    }
-}); 
+// Asegurar que el botón flotante esté visible al cargar la página
+window.addEventListener('DOMContentLoaded', () => {
+    toggleFabCart(true);
+});
+
+// Botón de pagar funcional
+const checkoutBtn = document.getElementById('checkoutBtn');
+if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', () => {
+        checkout();
+    });
+} 

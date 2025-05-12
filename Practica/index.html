@@ -21,10 +21,6 @@
     <a href="#novedades">Novedades</a>
     <a href="#blog">Blog</a>
     <a href="#contacto">Contacto</a>
-    <div class="cart-icon">
-      <i class="fas fa-shopping-cart"></i>
-      <span class="cart-count" id="cartCount">0</span>
-    </div>
   </nav>
 
   <div class="search-container">
@@ -110,7 +106,7 @@
           <h3>Richard Mille 57-03</h3>
           <p>Edición especial conmemorativa</p>
           <p class="price">3.946.102,00 €</p>
-          <button onclick="addToCart(4, 'Richard Mille 57-03', 3946102)">Añadir al carrito</button>
+          <button onclick="addToCart(1, 'Richard Mille 57-03', 3946102)">Añadir al carrito</button>
         </div>
       </div>
     </section>
@@ -169,13 +165,22 @@
       </form>
     </section>
 
+    <div class="fab-cart" id="fabCartBtn" title="Ver carrito">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="fab-cart-count" id="fabCartCount">0</span>
+    </div>
+
     <div class="cart-modal">
+      <button class="cart-close" id="cartCloseBtn" title="Cerrar carrito">&times;</button>
       <h3>Carrito de Compras</h3>
       <div id="cartItems"></div>
       <div class="cart-total">
         Total: <span id="cartTotal">0,00 €</span>
       </div>
-      <button onclick="checkout()">Proceder al pago</button>
+      <div class="cart-actions">
+        <button type="button" id="emptyCartBtn">Vaciar carrito</button>
+        <button type="button" id="checkoutBtn">Proceder al pago</button>
+      </div>
     </div>
   </main>
 
